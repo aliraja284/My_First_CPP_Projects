@@ -1,0 +1,57 @@
+print("Simple Calculator")
+print("Note: Enter numbers only\n")
+
+while True:
+    # First number validation
+    while True:
+        num1 = input("Enter first number: ")
+        try:
+            num1 = float(num1)
+            break
+        except ValueError:
+            print("Error: Please enter a valid number only.\n")
+
+    # Operator validation
+    while True:
+        operator = input("Enter operator (+, -, *, /): ")
+        if operator in ['+', '-', '*', '/']:
+            break
+        else:
+            print("Error: Please enter +, -, * or / only.\n")
+
+    # Second number validation
+    while True:
+        num2 = input("Enter second number: ")
+        try:
+            num2 = float(num2)
+            break
+        except ValueError:
+            print("Error: Please enter a valid number only.\n")
+
+    # Calculation
+    if operator == '+':
+        result = num1 + num2
+    elif operator == '-':
+        result = num1 - num2
+    elif operator == '*':
+        result = num1 * num2
+    elif operator == '/':
+        if num2 == 0:
+            print("\nError: Division by zero is not allowed.")
+        else:
+            result = num1 / num2
+    
+    if operator != '/' or num2 != 0:
+        print(f"\nResult: {num1} {operator} {num2} = {result}")
+
+    # Continue karna hai ya nahi - Y/N VALIDATION
+    while True:
+        choice = input("\nDo you want to continue? (y/n): ").lower()
+        if choice == 'y':
+            print("")  # Ek line gap ke liye
+            break
+        elif choice == 'n':
+            print("\nCalculator closed. Thank you!")
+            exit()
+        else:
+            print("Error: Please enter 'y' or 'n' only.")
