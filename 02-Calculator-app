@@ -1,0 +1,76 @@
+#include <iostream>
+#include <limits>
+#include <cstdlib> // system("clear") ke liye
+using namespace std;
+
+void clearScreen() {
+    // Mobile/CxxDroid pe ye chalta hai
+    system("clear"); 
+    // Agar PC pe chalay to system("cls"); use karna
+}
+
+int main() {
+    float num1, num2;
+    char operation;
+    int choice;
+    
+    do {
+        clearScreen(); // Har baar shuru mein screen saaf
+        cout << "=== Calculator ===" << endl;
+        
+        // Pehla number - Error check ke saath
+        cout << "Enter First Number: ";
+        while(!(cin >> num1)){
+            cout << "Error! Enter only Number : ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        
+        // Dusra number - Error check ke saath
+        cout << "Enter Second Number: ";
+        while(!(cin >> num2)){
+            cout << "Error! Enter Only Number: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        
+        // Operation - Galat operation pe dobara puche ga
+        cout << "Operation + - * / : ";
+        while(!(cin >> operation) || (operation!='+' && operation!='-' && operation!='*' && operation!='/')){
+            cout << "Error! Enter operation  + - * / : ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        
+        // Calculation
+        if(operation == '+'){
+            cout << "Answer = " << num1 + num2 << endl;
+        }
+        else if(operation == '-'){
+            cout << "Answer = " << num1 - num2 << endl;
+        }
+        else if(operation == '*'){
+            cout << "Answer = " << num1 * num2 << endl;
+        }
+        else if(operation == '/'){
+            if(num2 == 0){
+                cout << "Error! Zero Can't divide" << endl;
+            } else {
+                cout << "Answer = " << num1 / num2 << endl;
+            }
+        }
+        
+        // Exit ya Repeat - Is mein bhi validation
+        cout << "\nYou want to repeat it then press 1 otherwise press 2 for exit: ";
+        while(!(cin >> choice) || (choice!=1 && choice!=2)){
+            cout << "Error! Enter Only 1 or 2: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        
+    } while(choice == 1);
+    
+    clearScreen();
+    cout << "Thanks Goodby" << endl;
+    return 0;
+}
