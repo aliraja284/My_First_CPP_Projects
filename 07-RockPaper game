@@ -1,0 +1,89 @@
+import random
+
+def get_computer_choice():
+    choices = ["rock", "paper", "scissors"]
+    return random.choice(choices)
+
+def determine_winner(user, computer):
+    if user == computer:
+        return "tie"
+    elif (user == "rock" and computer == "scissors") or \
+         (user == "scissors" and computer == "paper") or \
+         (user == "paper" and computer == "rock"):
+        return "user"
+    else:
+        return "computer"
+
+def show_score(user_score, computer_score, ties):
+    print("\n" + "="*30)
+    print("SCORE BOARD")
+    print("="*30)
+    print(f"You: {user_score} | Computer: {computer_score} | Ties: {ties}")
+    print("="*30)
+
+def main():
+    print("Rock Paper Scissors Game")
+    print("Rules: Rock beats Scissors, Scissors beat Paper, Paper beats Rock\n")
+    
+    user_score = 0
+    computer_score = 0
+    ties = 0
+    
+    while True:
+        print("\nChoose your weapon:")
+        print("1. Rock")
+        print("2. Paper") 
+        print("3. Scissors")
+        
+        # USER INPUT VALIDATION LOOP
+        while True:
+            choice = input("Enter your choice (1-3): ").strip()
+            if choice == '1':
+                user_choice = "rock"
+                break
+            elif choice == '2':
+                user_choice = "paper"
+                break
+            elif choice == '3':
+                user_choice = "scissors"
+                break
+            else:
+                print("Error: Please enter 1, 2, or 3")
+        
+        computer_choice = get_computer_choice()
+        
+        print(f"\nYou chose: {user_choice}")
+        print(f"Computer chose: {computer_choice}")
+        
+        winner = determine_winner(user_choice, computer_choice)
+        
+        if winner == "tie":
+            print("Result: It's a Tie!")
+            ties += 1
+        elif winner == "user":
+            print("Result: You Win!")
+            user_score += 1
+        else:
+            print("Result: Computer Wins!")
+            computer_score += 1
+        
+        show_score(user_score, computer_score, ties)
+        
+        # PLAY AGAIN VALIDATION - TERA WALA BUG FIX PEHLE SE DALA
+        while True:
+            play_again = input("\nPlay again? (y/n): ").lower().strip()
+            if play_again == 'y':
+                print("\n" + "="*40)
+                print("NEW ROUND")
+                print("="*40)
+                break
+            elif play_again == 'n':
+                print("\nFinal Score:")
+                show_score(user_score, computer_score, ties)
+                print("\nThanks for playing!")
+                exit()
+            else:
+                print("Error: Please enter 'y' for yes or 'n' for no")
+
+if __name__ == "__main__":
+    main()
